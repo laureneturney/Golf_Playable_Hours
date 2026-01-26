@@ -71,7 +71,7 @@ def time_to_float(t):
 def load_sunrise_sunset_cloud(station_id: str) -> tuple[pd.DataFrame, dict]:
     """Loads Sunrise/Sunset files that you uploaded to your GitHub repository."""
     # This assumes you uploaded files named 'USW000..._SUNRISE_SUNSET.csv' to your GitHub
-    csv_path = BASE_DIR / f"{station_id}_SUNRISE_SUNSET.csv"
+    csv_path = BASE_DIR / "SUNRISE_SUNSET" /f"{station_id}_SUNRISE_SUNSET.csv"
     
     if not csv_path.exists():
         st.error(f"Reference file missing on GitHub: {csv_path.name}")
