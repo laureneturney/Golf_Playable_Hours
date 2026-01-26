@@ -136,9 +136,19 @@ def run_city_gph(city_caps: str, years: list[int]) -> tuple[pd.DataFrame, pd.Dat
     hourly.loc[hourly["DATA_OK"] == 1, "Precip"] = hourly.loc[hourly["DATA_OK"] == 1, "Precip"].fillna(0.0)
 
     # Flags
-    wc = hourly["HourlyPresentWeatherType"].fillna("").astype(str).upper()
-    hourly["Has_Thunder"] = wc.str.contains(r"TS|TSTM|LTG")
-    hourly["Wet_LowVis"] = (wc.str.contains(r"RA|DZ|BR|FG")) & (hourly["Visibility_Mi"] < 6)
+# --- 3. Processing Logic (Updated for 'upper' error) ---
+    
+    # Ensure the column is treated as strings, then use .str.upper()
+    wc = hourly["HourlyPresentWeatherType"].fillna("").astype(str).str.upper()
+    
+    # Use .str.contains for vectorized string searching
+    hourly["Has_Thunder"] = wc.str.contains(r"TS|TSTM|LTG", regex=True)
+    hourly["Wet_LowVis"] = (wc.str.contains(r"RA|DZ|BR|FG", regex=True)) & (hourly["Visibility_Mi"] < 6)
+
+    # Update Rain_Severity to use vectorized logic
+    hourly["Rain_Severity"] = 0.0
+    hourly.loc[wc.str.contains(r"RA", na=False), "Rain_Severity"] = 1.0
+    hourly.loc[wc.str.contains(r"\+RA", na=False), "Rain_Severity"] = 2.0
 
     # Daylight logic
     def get_daylight_flag(ts):
