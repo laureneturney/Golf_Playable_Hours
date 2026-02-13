@@ -969,25 +969,29 @@ def main():
     .stButton > button[kind="primary"],
     .stButton > button {
         background-color: #2d6a4f;
-        color: #ffffff;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
         border: none;
         border-radius: 6px;
         font-weight: 600;
     }
     .stButton > button:hover {
         background-color: #1b4332;
-        color: #ffffff;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
     }
     .stDownloadButton > button {
         background-color: #2d6a4f;
-        color: #ffffff;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
         border: none;
         border-radius: 6px;
         font-weight: 600;
     }
     .stDownloadButton > button:hover {
         background-color: #1b4332;
-        color: #ffffff;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
     }
 
     /* --- Headings --- */
