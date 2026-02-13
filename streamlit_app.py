@@ -60,9 +60,9 @@ class StationDatabase:
     """Manages persistent storage of user-defined stations.
 
     Persistence strategy (in priority order):
-      1. GitHub Gist (cloud-safe, survives Streamlit Cloud restarts)
-      2. Local JSON file (works for local development)
-      3. Hardcoded defaults (fallback)
+    1. GitHub Gist (cloud-safe, survives Streamlit Cloud restarts)
+    2. Local JSON file (works for local development)
+    3. Hardcoded defaults (fallback)
     """
 
     def __init__(self, db_path: Path = STATIONS_DB_PATH):
@@ -212,8 +212,8 @@ def geocode_location(query: str) -> Optional[Tuple[float, float]]:
     Convert a location name or coordinate string to (lat, lon).
 
     Supports:
-      - Coordinate input: "40.7,-74.0" -> (40.7, -74.0)
-      - Location name: "New York" -> geocoded via Nominatim
+    - Coordinate input: "40.7,-74.0" -> (40.7, -74.0)
+    - Location name: "New York" -> geocoded via Nominatim
 
     Returns:
         (latitude, longitude) tuple, or None on failure
@@ -496,8 +496,8 @@ def _noaa_sunrise_sunset(date_obj, lat: float, lon: float, utc_offset: int) -> T
 
     anom_rad = math.radians(geom_mean_anom)
     eq_center = (math.sin(anom_rad) * (1.914602 - jc * (0.004817 + jc * 0.000014))
-                 + math.sin(2 * anom_rad) * (0.019993 - jc * 0.000101)
-                 + math.sin(3 * anom_rad) * 0.000289)
+                + math.sin(2 * anom_rad) * (0.019993 - jc * 0.000101)
+                + math.sin(3 * anom_rad) * 0.000289)
 
     sun_true_long = geom_mean_long + eq_center
     sun_app_long = sun_true_long - 0.00569 - 0.00478 * math.sin(math.radians(125.04 - 1934.136 * jc))
@@ -527,7 +527,7 @@ def _noaa_sunrise_sunset(date_obj, lat: float, lon: float, utc_offset: int) -> T
     lat_rad = math.radians(lat)
     decl_rad = math.radians(sun_decl)
     cos_ha = (math.cos(math.radians(90.833)) / (math.cos(lat_rad) * math.cos(decl_rad))
-              - math.tan(lat_rad) * math.tan(decl_rad))
+            - math.tan(lat_rad) * math.tan(decl_rad))
 
     # Polar day/night check
     if cos_ha < -1 or cos_ha > 1:
@@ -547,7 +547,7 @@ def _noaa_sunrise_sunset(date_obj, lat: float, lon: float, utc_offset: int) -> T
 
 @st.cache_data(show_spinner=False)
 def compute_sunrise_sunset(lat: float, lon: float, utc_offset: int,
-                           start_year: int = 2021, end_year: int = 2051) -> pd.DataFrame:
+                        start_year: int = 2021, end_year: int = 2051) -> pd.DataFrame:
     """
     Compute daily sunrise/sunset for a location across multiple years.
     Produces the same format as the pre-generated SUNRISE_SUNSET CSV files.
@@ -942,6 +942,14 @@ def main():
         display: none !important;
     }
     #MainMenu {
+        display: none !important;
+    }
+
+    /* --- Hide "Manage app" button (bottom-right) --- */
+    [data-testid="manage-app-button"],
+    .stAppDeployButton,
+    [data-testid="stStatusWidget"],
+    footer {
         display: none !important;
     }
 
