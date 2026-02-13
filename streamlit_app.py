@@ -1046,6 +1046,22 @@ def main():
         color: #1a1a2e !important;
         border: 1px solid #333333 !important;
         border-radius: 6px !important;
+        caret-color: #1a1a2e !important;
+    }
+    /* Placeholder text */
+    .stTextInput input::placeholder,
+    .stNumberInput input::placeholder,
+    input::placeholder {
+        color: #888888 !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #888888 !important;
+    }
+    /* Force typed text to be dark in all inputs */
+    .stTextInput input,
+    .stNumberInput input,
+    [data-baseweb="input"] input,
+    [data-baseweb="base-input"] input {
+        -webkit-text-fill-color: #1a1a2e !important;
     }
     /* All baseweb input containers */
     [data-baseweb="input"],
