@@ -1,0 +1,11 @@
+[client]
+showSidebarNavigation = true
+toolbarMode = "viewer"
+
+[theme]
+base = "light"
+primaryColor = "#2d6a4f"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f4f1"
+textColor = "#1a1a2e"
+font = "sans serif"
