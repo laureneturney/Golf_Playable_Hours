@@ -934,6 +934,17 @@ def main():
         background-color: #1b4332;
     }
 
+    /* --- Hide toolbar (Share, Edit, three-dot menu) --- */
+    [data-testid="stToolbar"] {
+        display: none !important;
+    }
+    .stDeployButton {
+        display: none !important;
+    }
+    #MainMenu {
+        display: none !important;
+    }
+
     /* --- Sidebar collapse/expand arrows --- */
     button[data-testid="stBaseButton-headerNoPadding"] svg {
         color: #ffffff !important;
