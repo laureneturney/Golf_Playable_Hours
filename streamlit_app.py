@@ -1065,6 +1065,14 @@ def main():
         overflow: visible !important;
         text-overflow: clip !important;
     }
+    /* The multiselect value container scrolls right to reveal the text
+       cursor when focused, clipping the start of the tag on the left.
+       Let it wrap to a new line instead of scrolling. */
+    .stMultiSelect [data-baseweb="select"] > div,
+    .stMultiSelect [data-baseweb="select"] > div > div {
+        overflow: visible !important;
+        flex-wrap: wrap !important;
+    }
 
     /* --- Text inputs, selectboxes, multiselect, number inputs --- */
     .stTextInput input,
