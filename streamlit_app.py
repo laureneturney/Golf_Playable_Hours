@@ -1065,17 +1065,26 @@ def main():
         text-overflow: clip !important;
     }
     /* Let the multiselect box grow taller and wrap its tags onto new
-       rows. Without height:auto the wrapped rows spilled out of the box
-       and overlapped the widgets below; with a single non-wrapping row
-       the box scrolled horizontally and clipped the first tag's start. */
-    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
-        height: auto !important;
-        min-height: 38px !important;
-        flex-wrap: wrap !important;
-        overflow: visible !important;
-    }
+       rows. The select box and its inner containers are capped in height,
+       so when many stations are selected the last row spilled out and
+       overlapped the widgets below. height:auto + max-height:none lets the
+       box grow to contain every tag instead of clipping/spilling. */
+    div[data-testid="stMultiSelect"] [data-baseweb="select"],
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div,
     div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 38px !important;
+        overflow: visible !important;
         flex-wrap: wrap !important;
+    }
+    /* The search input sits in an absolutely-positioned wrapper that the
+       broad white-background rule below paints white, covering the start
+       ("Al") of the first selected tag. Keep the input and its wrapper
+       transparent so the tag underneath stays fully visible. */
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] input,
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] div[class]:has(> input) {
+        background-color: transparent !important;
     }
 
     /* --- Text inputs, selectboxes, multiselect, number inputs --- */
