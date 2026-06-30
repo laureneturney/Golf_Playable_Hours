@@ -792,11 +792,11 @@ def calculate_gph(
             return None, None
         
         # 3. Create hourly index with DATA_OK flag
-        weather_df["Hour_Rounded"] = weather_df["DATE"].dt.floor("H")
+        weather_df["Hour_Rounded"] = weather_df["DATE"].dt.floor("h")
         hourly = weather_df.drop_duplicates("Hour_Rounded", keep="last").set_index("Hour_Rounded")
         hourly["DATA_OK"] = 1
         
-        full_idx = pd.date_range(hourly.index.min(), hourly.index.max(), freq="H")
+        full_idx = pd.date_range(hourly.index.min(), hourly.index.max(), freq="h")
         hourly = hourly.reindex(full_idx)
         hourly["DATA_OK"] = hourly["DATA_OK"].fillna(0).astype(int)
         
