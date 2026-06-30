@@ -1065,12 +1065,16 @@ def main():
         overflow: visible !important;
         text-overflow: clip !important;
     }
-    /* The multiselect value container scrolls right to reveal the text
-       cursor when focused, clipping the start of the tag on the left.
-       Let it wrap to a new line instead of scrolling. */
-    .stMultiSelect [data-baseweb="select"] > div,
-    .stMultiSelect [data-baseweb="select"] > div > div {
+    /* The multiselect value container scrolls horizontally (scrollLeft)
+       and clips the start of the first tag, especially on blur. Force
+       every inner container of the select to never clip, and let the
+       tag row wrap instead of scroll. */
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] div {
         overflow: visible !important;
+    }
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div,
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div,
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div > div {
         flex-wrap: wrap !important;
     }
 
