@@ -1054,6 +1054,16 @@ def main():
     /* --- Multiselect tags --- */
     span[data-baseweb="tag"] {
         background-color: #2d6a4f !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+    /* Show the full station name instead of clipping it on the sides
+       when the multiselect loses focus. */
+    span[data-baseweb="tag"] span,
+    span[data-baseweb="tag"] div {
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
     }
 
     /* --- Text inputs, selectboxes, multiselect, number inputs --- */
