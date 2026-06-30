@@ -1057,24 +1057,24 @@ def main():
         max-width: none !important;
         overflow: visible !important;
     }
-    /* Show the full station name instead of clipping it on the sides
-       when the multiselect loses focus. */
+    /* Show the full station name instead of truncating it. */
     span[data-baseweb="tag"] span,
     span[data-baseweb="tag"] div {
         max-width: none !important;
         overflow: visible !important;
         text-overflow: clip !important;
     }
-    /* The multiselect value container scrolls horizontally (scrollLeft)
-       and clips the start of the first tag, especially on blur. Force
-       every inner container of the select to never clip, and let the
-       tag row wrap instead of scroll. */
-    div[data-testid="stMultiSelect"] [data-baseweb="select"] div {
+    /* Let the multiselect box grow taller and wrap its tags onto new
+       rows. Without height:auto the wrapped rows spilled out of the box
+       and overlapped the widgets below; with a single non-wrapping row
+       the box scrolled horizontally and clipped the first tag's start. */
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+        height: auto !important;
+        min-height: 38px !important;
+        flex-wrap: wrap !important;
         overflow: visible !important;
     }
-    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div,
-    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div,
-    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div > div {
+    div[data-testid="stMultiSelect"] [data-baseweb="select"] > div > div {
         flex-wrap: wrap !important;
     }
 
